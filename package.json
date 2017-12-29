@@ -1,0 +1,14 @@
+{
+  "name": "gilded_rose",
+  "version": "1.0.0",
+  "description": "Solution to GildedRose Refactoring Kata",
+  "main": "src/gilded_rose.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Christina Chan",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^22.0.4"
+  }
+}
