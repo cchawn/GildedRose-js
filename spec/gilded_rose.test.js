@@ -111,7 +111,7 @@ describe('Gilded Rose', () => {
 
     describe('when SellIn date has passed', () => {
       beforeEach(() => {
-        gildedRose = createShop({ name, sellIn: 0 });
+        gildedRose = createShop({ name, sellIn: 0, quality: 10 });
       });
 
       it('Quality drops to 0', () => {
@@ -122,13 +122,20 @@ describe('Gilded Rose', () => {
   });
 
   describe('when Quality is 50', () => {
-    beforeEach(() => {
-      gildedRose = createShop({ name: 'Aged Brie', sellIn: 1, quality: 50 });
-    });
+    const itemNames = [
+      'Aged Brie',
+      'Backstage passes to a TAFKAL80ETC concert',
+    ];
 
-    it('does not increase quality above 50', () => {
-      gildedRose.updateQuality();
-      expect(item().quality).not.toBeGreaterThan(50);
+    itemNames.forEach((name) => {
+      beforeEach(() => {
+        gildedRose = createShop({ name, sellIn: 1, quality: 50 });
+      });
+
+      it('does not increase quality above 50', () => {
+        gildedRose.updateQuality();
+        expect(item().quality).toEqual(50);
+      });
     });
   });
 
