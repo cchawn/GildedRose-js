@@ -140,7 +140,7 @@ describe('Gilded Rose', () => {
   });
 
   describe('Conjured items', () => {
-    it('reduces in Quality by 2 each day');
+    it('reduces in Quality by 2 each day', () => {});
   });
 
   let gildedRose;
