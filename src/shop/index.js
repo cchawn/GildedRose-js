@@ -25,6 +25,8 @@ class Shop {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
 
+      if (item.name === SULFURAS) { continue; }
+
       if (item.name === BRIE) {
         item.quality = Shop.increaseQuality(item.quality);
       } else if (item.name === PASSES) {
@@ -35,10 +37,6 @@ class Shop {
         if (item.sellIn <= 5) {
           item.quality = Shop.increaseQuality(item.quality);
         }
-      } else if (item.name === SULFURAS) {
-        /* Sulfuras, Hand of Ragnaros
-         * Do nothing. Quality never decreases.
-         */
       } else {
         /* Everything else
          * Decrease quality by 1 to a minimum of 0.
@@ -47,9 +45,7 @@ class Shop {
       }
 
       /* Decrease Sell In Date */
-      if (item.name !== SULFURAS) {
-        item.sellIn = Shop.decreaseSellIn(item.sellIn);
-      }
+      item.sellIn = Shop.decreaseSellIn(item.sellIn);
 
       /** Sell In Date has passed **/
       if (item.sellIn < 0) {
@@ -65,10 +61,6 @@ class Shop {
            * decrease the quality to 0.
            */
           item.quality = 0;
-        } else if (item.name === SULFURAS) {
-          /* Sulfuras, Hand of Ragnaros
-           * Do nothing. Quality never decreases.
-           */
         } else {
           /* Everything else
            * Once the sell in date has passed,
