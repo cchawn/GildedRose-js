@@ -25,42 +25,25 @@ class Shop {
 
       if (item.name === SULFURAS) { continue; }
 
-      if (item.name !== BRIE && item.name !== PASSES) {
-        new ItemProcessor(item).process();
-      } else if (item.name === BRIE) {
+      if (item.name === BRIE) {
         new BrieProcessor(item).process();
-      } else {
-        if (item.name === BRIE) {
+      } else if (item.name === PASSES) {
+        item.quality = Shop.increaseQuality(item.quality);
+        if (item.sellIn <= 10) {
           item.quality = Shop.increaseQuality(item.quality);
-        } else if (item.name === PASSES) {
+        }
+        if (item.sellIn <= 5) {
           item.quality = Shop.increaseQuality(item.quality);
-          if (item.sellIn <= 10) {
-            item.quality = Shop.increaseQuality(item.quality);
-          }
-          if (item.sellIn <= 5) {
-            item.quality = Shop.increaseQuality(item.quality);
-          }
         }
 
         /* Decrease Sell In Date */
         item.sellIn = Shop.decreaseSellIn(item.sellIn);
 
-        /** Sell In Date has passed **/
         if (item.sellIn < 0) {
-          if (item.name === BRIE) {
-            /* Aged Brie
-             * Once the sell in date has passed,
-             * increase in quality up to a maximum of 50.
-             */
-            item.quality = Shop.increaseQuality(item.quality);
-          } else if (item.name === PASSES) {
-            /* Backstage Passes
-             * Once the sell in date has passed,
-             * decrease the quality to 0.
-             */
-            item.quality = 0;
-          }
+          item.quality = 0;
         }
+      } else {
+        new ItemProcessor(item).process();
       }
     }
 
