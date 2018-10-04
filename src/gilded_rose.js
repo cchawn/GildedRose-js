@@ -15,6 +15,10 @@ class Shop {
     this.items = items;
   }
 
+  static decreaseSellIn(sellIn) {
+    return sellIn - 1;
+  }
+
   static increaseQuality(quality) {
     if (quality < 50) return quality + 1;
     return quality;
@@ -49,7 +53,7 @@ class Shop {
 
       /* Decrease Sell In Date */
       if (item.name !== SULFURAS) {
-        item.sellIn = item.sellIn - 1;
+        item.sellIn = Shop.decreaseSellIn(item.sellIn);
       }
 
       /** Sell In Date has passed **/
