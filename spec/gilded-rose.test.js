@@ -146,7 +146,7 @@ describe('Gilded Rose', () => {
 
   let gildedRose;
 
-  function createShop({ name, sellIn = 0, quality = 0 }) {
+  function createShop({ name = 'Name', sellIn = 10, quality = 10 }) {
     return new Shop([ new Item(name, sellIn, quality) ]);
   }
 
