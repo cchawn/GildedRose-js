@@ -11,8 +11,8 @@ class PassesProcessor extends ItemProcessor {
   }
 
   getQualityChangeRate(sellIn) {
-    if (sellIn <= 10) { return 2; }
     if (sellIn <= 5) { return 3; }
+    if (sellIn <= 10) { return 2; }
     return 1;
   }
 }
