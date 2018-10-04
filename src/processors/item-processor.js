@@ -33,6 +33,10 @@ class ItemProcessor {
   getSellInChangeRate() {
     return -1;
   }
+
+  isPastSellInDate() {
+    return this.item.sellIn < 0;
+  }
 }
 
 module.exports = ItemProcessor;
