@@ -13,11 +13,6 @@ class Shop {
     return sellIn - 1;
   }
 
-  static decreaseQuality(quality) {
-    if (quality > 0) return quality - 1;
-    return quality;
-  }
-
   static increaseQuality(quality) {
     if (quality < 50) return quality + 1;
     return quality;
@@ -43,11 +38,6 @@ class Shop {
           if (item.sellIn <= 5) {
             item.quality = Shop.increaseQuality(item.quality);
           }
-        } else {
-          /* Everything else
-           * Decrease quality by 1 to a minimum of 0.
-           */
-          item.quality = Shop.decreaseQuality(item.quality);
         }
 
         /* Decrease Sell In Date */
