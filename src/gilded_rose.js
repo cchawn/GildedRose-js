@@ -34,14 +34,16 @@ class Shop {
             }
           }
         }
+      } else if (item.name === SULFURAS) {
+        /* Sulfuras, Hand of Ragnaros
+         * Do nothing. Quality never decreases.
+         */
       } else {
         /* Everything else
          * Decrease quality by 1 to a minimum of 0.
          */
         if (item.quality > 0) {
-          if (item.name !== SULFURAS) {
-            item.quality = item.quality - 1;
-          }
+          item.quality = item.quality - 1;
         }
       }
 
@@ -66,6 +68,10 @@ class Shop {
            * decrease the quality to 0.
            */
           item.quality = 0;
+        } else if (item.name === SULFURAS) {
+          /* Sulfuras, Hand of Ragnaros
+           * Do nothing. Quality never decreases.
+           */
         } else {
           /* Everything else
            * Once the sell in date has passed,
@@ -73,9 +79,7 @@ class Shop {
            * We already decreased the quality once, do it again here.
            */
           if (item.quality > 0) {
-            if (item.name !== SULFURAS) {
-              item.quality = item.quality - 1;
-            }
+            item.quality = item.quality - 1;
           }
         }
       }
