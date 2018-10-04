@@ -55,7 +55,7 @@ describe('Gilded Rose', () => {
 
   describe('Sulfuras, Hand of Ragnaros', () => {
     beforeEach(() => {
-      gildedRose = createShop({ name: 'Sulfuras, Hand of Ragnaros' });
+      gildedRose = createShop({ name: 'Sulfuras, Hand of Ragnaros', quality: 80 });
     });
 
     it('does not reduce Quality', () => {
