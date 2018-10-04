@@ -1,11 +1,3 @@
-class Item {
-  constructor(name, sellIn, quality){
-    this.name = name;
-    this.sellIn = sellIn;
-    this.quality = quality;
-  }
-}
-
 const BRIE = 'Aged Brie';
 const SULFURAS = 'Sulfuras, Hand of Ragnaros';
 const PASSES = 'Backstage passes to a TAFKAL80ETC concert';
@@ -92,4 +84,4 @@ class Shop {
   }
 }
 
-module.exports = { Item, Shop };
+module.exports = { Shop };

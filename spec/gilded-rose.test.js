@@ -1,4 +1,5 @@
-const { Item, Shop } = require('../src/gilded_rose');
+const { Item } = require('../src/item');
+const { Shop } = require('../src/shop');
 
 describe('Gilded Rose', () => {
   beforeEach(() => {
