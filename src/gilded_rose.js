@@ -59,9 +59,7 @@ class Shop {
            * Once the sell in date has passed,
            * increase in quality up to a maximum of 50.
            */
-          if (item.quality < 50) {
-            item.quality = item.quality + 1;
-          }
+          item.quality = Shop.increaseQuality(item.quality);
         } else if (item.name === PASSES) {
           /* Backstage Passes
            * Once the sell in date has passed,
