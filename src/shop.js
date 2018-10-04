@@ -1,6 +1,7 @@
 const ItemProcessor = require('./processors/item-processor');
 const BrieProcessor = require('./processors/brie-processor');
 const PassesProcessor = require('./processors/passes-processor');
+const LegendaryProcessor = require('./processors/legendary-processor');
 
 const BRIE = 'Aged Brie';
 const SULFURAS = 'Sulfuras, Hand of Ragnaros';
@@ -15,9 +16,9 @@ class Shop {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
 
-      if (item.name === SULFURAS) { continue; }
-
-      if (item.name === BRIE) {
+      if (item.name === SULFURAS) {
+        new LegendaryProcessor(item).process();
+      } else if (item.name === BRIE) {
         new BrieProcessor(item).process();
       } else if (item.name === PASSES) {
         new PassesProcessor(item).process();
