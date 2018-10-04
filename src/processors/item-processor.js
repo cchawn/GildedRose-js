@@ -25,8 +25,8 @@ class ItemProcessor {
     );
   }
 
-  getQualityChangeRate(sellIn) {
-    if (sellIn < 0) { return -2; }
+  getQualityChangeRate() {
+    if (this.isPastSellInDate()) { return -2; }
     return -1;
   }
 
@@ -35,7 +35,7 @@ class ItemProcessor {
   }
 
   isPastSellInDate() {
-    return this.item.sellIn < 0;
+    return this.item.sellIn <= 0;
   }
 }
 
