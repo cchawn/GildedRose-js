@@ -19,6 +19,11 @@ class Shop {
     return sellIn - 1;
   }
 
+  static decreaseQuality(quality) {
+    if (quality > 0) return quality - 1;
+    return quality;
+  }
+
   static increaseQuality(quality) {
     if (quality < 50) return quality + 1;
     return quality;
@@ -46,9 +51,7 @@ class Shop {
         /* Everything else
          * Decrease quality by 1 to a minimum of 0.
          */
-        if (item.quality > 0) {
-          item.quality = item.quality - 1;
-        }
+        item.quality = Shop.decreaseQuality(item.quality);
       }
 
       /* Decrease Sell In Date */
@@ -80,9 +83,7 @@ class Shop {
            * decrease the quality twice as fast to a minimum of 0.
            * We already decreased the quality once, do it again here.
            */
-          if (item.quality > 0) {
-            item.quality = item.quality - 1;
-          }
+          item.quality = Shop.decreaseQuality(item.quality);
         }
       }
     }
