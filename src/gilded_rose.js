@@ -18,13 +18,7 @@ class Shop {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
 
-      if (item.name !== BRIE && item.name !== PASSES) {
-        if (item.quality > 0) {
-          if (item.name !== SULFURAS) {
-            item.quality = item.quality - 1;
-          }
-        }
-      } else {
+      if (item.name === BRIE || item.name === PASSES) {
         if (item.quality < 50) {
           item.quality = item.quality + 1;
           if (item.name === PASSES) {
@@ -38,6 +32,15 @@ class Shop {
                 item.quality = item.quality + 1;
               }
             }
+          }
+        }
+      } else {
+        /* Everything else
+         * Decrease quality by 1 to a minimum of 0.
+         */
+        if (item.quality > 0) {
+          if (item.name !== SULFURAS) {
+            item.quality = item.quality - 1;
           }
         }
       }
