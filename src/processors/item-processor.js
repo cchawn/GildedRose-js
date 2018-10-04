@@ -1,3 +1,5 @@
+const MathUtils = require('../utils/math-utils');
+
 class ItemProcessor {
   constructor(item) {
     this.item = item;
@@ -15,7 +17,12 @@ class ItemProcessor {
   }
 
   updateQuality() {
-    this.item.quality += ItemProcessor.getQualityChangeRate(this.item.sellIn);
+    const quality = this.item.quality + ItemProcessor.getQualityChangeRate(this.item.sellIn);
+    this.item.quality = MathUtils.clamp(
+      this.QUALITY_LOWER_BOUND,
+      this.QUALITY_UPPER_BOUND,
+      quality,
+    );
   }
 
   static getQualityChangeRate(sellIn) {
