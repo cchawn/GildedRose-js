@@ -3,9 +3,8 @@ const { Shop } = require('../src/shop');
 
 describe('Gilded Rose', () => {
   let gildedRose;
-  let name = 'Item';
 
-  function createShop({ name, sellIn = 10, quality = 10 }) {
+  function createShop({ name = 'Item', sellIn = 10, quality = 10 }) {
     return new Shop([ new Item(name, sellIn, quality) ]);
   }
 
@@ -52,11 +51,10 @@ describe('Gilded Rose', () => {
     });
   });
 
-  assertQualityDoesNotIncreaseAbove50({ name });
-  assertQualityChangesTwiceAsFastWhenConjured({ name });
+  assertQualityChangesTwiceAsFastWhenConjured();
 
   describe('Aged Brie', () => {
-    name = 'Aged Brie';
+    const name = 'Aged Brie';
 
     beforeEach(() => {
       gildedRose = createShop({ name });
@@ -91,7 +89,7 @@ describe('Gilded Rose', () => {
   });
 
   describe('Backstage passes to a TAFKAL80ETC concert', () => {
-    name = 'Backstage passes to a TAFKAL80ETC concert';
+    const name = 'Backstage passes to a TAFKAL80ETC concert';
 
     describe('when SellIn date is more than 10 days away', () => {
       beforeEach(() => {
@@ -162,7 +160,7 @@ describe('Gilded Rose', () => {
     name = 'Item',
     sellIn = 10,
     quality = 10,
-  }) {
+  } = {}) {
     describe('when Conjured', () => {
       beforeEach(() => {
         gildedRose = new Shop([
