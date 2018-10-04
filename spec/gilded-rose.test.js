@@ -2,6 +2,16 @@ const { Item } = require('../src/item');
 const { Shop } = require('../src/shop');
 
 describe('Gilded Rose', () => {
+  let gildedRose;
+
+  function createShop({ name = 'Name', sellIn = 10, quality = 10 }) {
+    return new Shop([ new Item(name, sellIn, quality) ]);
+  }
+
+  function item() {
+    return gildedRose.items[0];
+  }
+
   beforeEach(() => {
     gildedRose = createShop({sellIn: 1, quality: 1 });
   });
@@ -42,8 +52,10 @@ describe('Gilded Rose', () => {
   });
 
   describe('Aged Brie', () => {
+    const name = 'Aged Brie';
+
     beforeEach(() => {
-      gildedRose = createShop({ name: 'Aged Brie', sellIn: 1, quality: 1 });
+      gildedRose = createShop({ name });
     });
 
     it('increases Quality by 1 each day', () => {
@@ -51,6 +63,8 @@ describe('Gilded Rose', () => {
       gildedRose.updateQuality();
       expect(item().quality).toEqual(previous + 1);
     });
+
+    assertQualityDoesNotIncreaseAbove50({ name });
   });
 
   describe('Sulfuras, Hand of Ragnaros', () => {
@@ -120,17 +134,19 @@ describe('Gilded Rose', () => {
         expect(item().quality).toEqual(0);
       });
     });
+
+    assertQualityDoesNotIncreaseAbove50({ name });
   });
 
-  describe('when Quality is 50', () => {
-    const itemNames = [
-      'Aged Brie',
-      'Backstage passes to a TAFKAL80ETC concert',
-    ];
+  describe('Conjured items', () => {
+    it('reduces in Quality by 2 each day', () => {});
+  });
 
-    itemNames.forEach((name) => {
+  // Shared assertions
+  function assertQualityDoesNotIncreaseAbove50({ name }) {
+    describe('when quality is at 50', () => {
       beforeEach(() => {
-        gildedRose = createShop({ name, sellIn: 1, quality: 50 });
+        gildedRose = createShop({ name, quality: 50 });
       });
 
       it('does not increase quality above 50', () => {
@@ -138,19 +154,5 @@ describe('Gilded Rose', () => {
         expect(item().quality).toEqual(50);
       });
     });
-  });
-
-  describe('Conjured items', () => {
-    it('reduces in Quality by 2 each day', () => {});
-  });
-
-  let gildedRose;
-
-  function createShop({ name = 'Name', sellIn = 10, quality = 10 }) {
-    return new Shop([ new Item(name, sellIn, quality) ]);
-  }
-
-  function item() {
-    return gildedRose.items[0];
   }
 });

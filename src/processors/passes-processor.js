@@ -10,9 +10,9 @@ class PassesProcessor extends ItemProcessor {
     super.updateQuality();
   }
 
-  getQualityChangeRate(sellIn) {
-    if (sellIn <= 5) { return 3; }
-    if (sellIn <= 10) { return 2; }
+  getQualityChangeRate() {
+    if (this.item.sellIn <= 5) { return 3; }
+    if (this.item.sellIn <= 10) { return 2; }
     return 1;
   }
 }

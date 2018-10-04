@@ -17,7 +17,7 @@ class ItemProcessor {
   }
 
   updateQuality() {
-    const quality = this.item.quality + this.getQualityChangeRate(this.item.sellIn);
+    const quality = this.item.quality + this.getQualityChangeRate();
     this.item.quality = MathUtils.clamp(
       this.QUALITY_LOWER_BOUND,
       this.QUALITY_UPPER_BOUND,

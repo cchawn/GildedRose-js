@@ -1,7 +1,7 @@
 const ItemProcessor = require('./item-processor');
 
 class BrieProcessor extends ItemProcessor {
-  getQualityChangeRate(sellIn) {
+  getQualityChangeRate() {
     if (this.isPastSellInDate()) { return 2; }
     return 1;
   }
