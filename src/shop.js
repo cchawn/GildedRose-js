@@ -1,4 +1,4 @@
-const { ItemProcessor } = require('./item-processor/item-processor');
+const { ItemProcessor } = require('./processors/item-processor');
 
 const BRIE = 'Aged Brie';
 const SULFURAS = 'Sulfuras, Hand of Ragnaros';
