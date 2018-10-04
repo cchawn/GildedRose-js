@@ -37,10 +37,10 @@ class Shop {
         item.quality = Shop.increaseQuality(item.quality);
       } else if (item.name === PASSES) {
         item.quality = Shop.increaseQuality(item.quality);
-        if (item.sellIn < 11) {
+        if (item.sellIn <= 10) {
           item.quality = Shop.increaseQuality(item.quality);
         }
-        if (item.sellIn < 6) {
+        if (item.sellIn <= 5) {
           item.quality = Shop.increaseQuality(item.quality);
         }
       } else if (item.name === SULFURAS) {
