@@ -17,6 +17,7 @@ class Shop {
 
   static increaseQuality(quality) {
     if (quality < 50) return quality + 1;
+    return quality;
   }
 
   updateQuality() {
@@ -26,16 +27,12 @@ class Shop {
       if (item.name === BRIE) {
         item.quality = Shop.increaseQuality(item.quality);
       } else if (item.name === PASSES) {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-          if (item.name === PASSES) {
-            if (item.sellIn < 11) {
-              item.quality = Shop.increaseQuality(item.quality);
-            }
-            if (item.sellIn < 6) {
-              item.quality = Shop.increaseQuality(item.quality);
-            }
-          }
+        item.quality = Shop.increaseQuality(item.quality);
+        if (item.sellIn < 11) {
+          item.quality = Shop.increaseQuality(item.quality);
+        }
+        if (item.sellIn < 6) {
+          item.quality = Shop.increaseQuality(item.quality);
         }
       } else if (item.name === SULFURAS) {
         /* Sulfuras, Hand of Ragnaros
