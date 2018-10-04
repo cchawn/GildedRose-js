@@ -1,9 +1,11 @@
+const { ItemProcessor } = require('./item-processor/item-processor');
+
 const BRIE = 'Aged Brie';
 const SULFURAS = 'Sulfuras, Hand of Ragnaros';
 const PASSES = 'Backstage passes to a TAFKAL80ETC concert';
 
 class Shop {
-  constructor(items=[]){
+  constructor(items=[]) {
     this.items = items;
   }
 
@@ -27,47 +29,45 @@ class Shop {
 
       if (item.name === SULFURAS) { continue; }
 
-      if (item.name === BRIE) {
-        item.quality = Shop.increaseQuality(item.quality);
-      } else if (item.name === PASSES) {
-        item.quality = Shop.increaseQuality(item.quality);
-        if (item.sellIn <= 10) {
-          item.quality = Shop.increaseQuality(item.quality);
-        }
-        if (item.sellIn <= 5) {
-          item.quality = Shop.increaseQuality(item.quality);
-        }
+      if (item.name !== BRIE && item.name !== PASSES) {
+        const processor = new ItemProcessor(item);
+        processor.process();
       } else {
-        /* Everything else
-         * Decrease quality by 1 to a minimum of 0.
-         */
-        item.quality = Shop.decreaseQuality(item.quality);
-      }
-
-      /* Decrease Sell In Date */
-      item.sellIn = Shop.decreaseSellIn(item.sellIn);
-
-      /** Sell In Date has passed **/
-      if (item.sellIn < 0) {
         if (item.name === BRIE) {
-          /* Aged Brie
-           * Once the sell in date has passed,
-           * increase in quality up to a maximum of 50.
-           */
           item.quality = Shop.increaseQuality(item.quality);
         } else if (item.name === PASSES) {
-          /* Backstage Passes
-           * Once the sell in date has passed,
-           * decrease the quality to 0.
-           */
-          item.quality = 0;
+          item.quality = Shop.increaseQuality(item.quality);
+          if (item.sellIn <= 10) {
+            item.quality = Shop.increaseQuality(item.quality);
+          }
+          if (item.sellIn <= 5) {
+            item.quality = Shop.increaseQuality(item.quality);
+          }
         } else {
           /* Everything else
-           * Once the sell in date has passed,
-           * decrease the quality twice as fast to a minimum of 0.
-           * We already decreased the quality once, do it again here.
+           * Decrease quality by 1 to a minimum of 0.
            */
           item.quality = Shop.decreaseQuality(item.quality);
+        }
+
+        /* Decrease Sell In Date */
+        item.sellIn = Shop.decreaseSellIn(item.sellIn);
+
+        /** Sell In Date has passed **/
+        if (item.sellIn < 0) {
+          if (item.name === BRIE) {
+            /* Aged Brie
+             * Once the sell in date has passed,
+             * increase in quality up to a maximum of 50.
+             */
+            item.quality = Shop.increaseQuality(item.quality);
+          } else if (item.name === PASSES) {
+            /* Backstage Passes
+             * Once the sell in date has passed,
+             * decrease the quality to 0.
+             */
+            item.quality = 0;
+          }
         }
       }
     }
