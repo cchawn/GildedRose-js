@@ -1,4 +1,5 @@
-const { ItemProcessor } = require('./processors/item-processor');
+const ItemProcessor = require('./processors/item-processor');
+const BrieProcessor = require('./processors/brie-processor');
 
 const BRIE = 'Aged Brie';
 const SULFURAS = 'Sulfuras, Hand of Ragnaros';
@@ -26,6 +27,8 @@ class Shop {
 
       if (item.name !== BRIE && item.name !== PASSES) {
         new ItemProcessor(item).process();
+      } else if (item.name === BRIE) {
+        new BrieProcessor(item).process();
       } else {
         if (item.name === BRIE) {
           item.quality = Shop.increaseQuality(item.quality);

@@ -13,11 +13,11 @@ class ItemProcessor {
   }
 
   updateSellIn() {
-    this.item.sellIn += ItemProcessor.getSellInChangeRate();
+    this.item.sellIn += this.getSellInChangeRate();
   }
 
   updateQuality() {
-    const quality = this.item.quality + ItemProcessor.getQualityChangeRate(this.item.sellIn);
+    const quality = this.item.quality + this.getQualityChangeRate(this.item.sellIn);
     this.item.quality = MathUtils.clamp(
       this.QUALITY_LOWER_BOUND,
       this.QUALITY_UPPER_BOUND,
@@ -25,14 +25,14 @@ class ItemProcessor {
     );
   }
 
-  static getQualityChangeRate(sellIn) {
+  getQualityChangeRate(sellIn) {
     if (sellIn < 0) { return -2; }
     return -1;
   }
 
-  static getSellInChangeRate() {
+  getSellInChangeRate() {
     return -1;
   }
 }
 
-module.exports = { ItemProcessor };
+module.exports = ItemProcessor;
