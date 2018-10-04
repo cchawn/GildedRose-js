@@ -1,4 +1,4 @@
-# Gilded Rose JS
+# Gilded Rose JS [![BCH compliance](https://bettercodehub.com/edge/badge/cchawn/GildedRose-js?branch=master)](https://bettercodehub.com/)
 Gilded Rose Kata in JavaScript. Starter code taken from [here](https://github.com/emilybache/GildedRose-Refactoring-Kata). Original Kata by Terry Hughes [here](https://github.com/NotMyself/GildedRose).
 
 ## Gilded Rose Requirements Specification
