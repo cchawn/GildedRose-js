@@ -17,7 +17,11 @@ class ItemProcessor {
   }
 
   updateQuality() {
-    const quality = this.item.quality + this.getQualityChangeRate();
+    let qualityChange = this.getQualityChangeRate();
+
+    if (this.isPastSellInDate()) { qualityChange *=2; }
+
+    const quality = this.item.quality + qualityChange;
     this.item.quality = MathUtils.clamp(
       this.QUALITY_LOWER_BOUND,
       this.QUALITY_UPPER_BOUND,
@@ -26,7 +30,6 @@ class ItemProcessor {
   }
 
   getQualityChangeRate() {
-    if (this.isPastSellInDate()) { return -2; }
     return -1;
   }
 
