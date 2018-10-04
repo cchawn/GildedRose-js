@@ -1,7 +1,7 @@
-const ItemProcessor = require('./processors/item-processor');
 const BrieProcessor = require('./processors/brie-processor');
-const PassesProcessor = require('./processors/passes-processor');
+const ItemProcessor = require('./processors/item-processor');
 const LegendaryProcessor = require('./processors/legendary-processor');
+const PassesProcessor = require('./processors/passes-processor');
 
 const BRIE = 'Aged Brie';
 const SULFURAS = 'Sulfuras, Hand of Ragnaros';
