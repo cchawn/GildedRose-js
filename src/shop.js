@@ -6,13 +6,9 @@ class Shop {
   }
 
   updateQuality() {
-    for (let i = 0; i < this.items.length; i++) {
-      const item = this.items[i];
-
-      ProcessorFactory.createProcessor(item).process();
-    }
-
-    return this.items;
+    return this.items
+      .map(ProcessorFactory.createProcessor)
+      .forEach(processor => processor.process());
   }
 }
 
