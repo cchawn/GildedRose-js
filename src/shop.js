@@ -25,8 +25,7 @@ class Shop {
       if (item.name === SULFURAS) { continue; }
 
       if (item.name !== BRIE && item.name !== PASSES) {
-        const processor = new ItemProcessor(item);
-        processor.process();
+        new ItemProcessor(item).process();
       } else {
         if (item.name === BRIE) {
           item.quality = Shop.increaseQuality(item.quality);
