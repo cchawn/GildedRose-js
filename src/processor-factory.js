@@ -9,11 +9,11 @@ const SULFURAS = 'Sulfuras, Hand of Ragnaros';
 
 class ProcessorFactory {
   static createProcessor(item) {
-    if (item.name === BRIE) {
+    if (item.name.includes(BRIE)) {
       return new BrieProcessor(item);
-    } else if (item.name === PASSES) {
+    } else if (item.name.includes(PASSES)) {
       return new PassesProcessor(item);
-    } else if (item.name === SULFURAS) {
+    } else if (item.name.includes(SULFURAS)) {
       return new LegendaryProcessor(item);
     } else {
       return new ItemProcessor(item);

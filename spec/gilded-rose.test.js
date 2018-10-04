@@ -3,8 +3,9 @@ const { Shop } = require('../src/shop');
 
 describe('Gilded Rose', () => {
   let gildedRose;
+  let name = 'Item';
 
-  function createShop({ name = 'Name', sellIn = 10, quality = 10 }) {
+  function createShop({ name, sellIn = 10, quality = 10 }) {
     return new Shop([ new Item(name, sellIn, quality) ]);
   }
 
@@ -51,8 +52,10 @@ describe('Gilded Rose', () => {
     });
   });
 
+  assertQualityChangesTwiceAsFastWhenConjured({ name });
+
   describe('Aged Brie', () => {
-    const name = 'Aged Brie';
+    name = 'Aged Brie';
 
     beforeEach(() => {
       gildedRose = createShop({ name });
@@ -65,6 +68,7 @@ describe('Gilded Rose', () => {
     });
 
     assertQualityDoesNotIncreaseAbove50({ name });
+    assertQualityChangesTwiceAsFastWhenConjured({ name });
   });
 
   describe('Sulfuras, Hand of Ragnaros', () => {
@@ -86,7 +90,7 @@ describe('Gilded Rose', () => {
   });
 
   describe('Backstage passes to a TAFKAL80ETC concert', () => {
-    const name = 'Backstage passes to a TAFKAL80ETC concert';
+    name = 'Backstage passes to a TAFKAL80ETC concert';
 
     describe('when SellIn date is more than 10 days away', () => {
       beforeEach(() => {
@@ -136,15 +140,12 @@ describe('Gilded Rose', () => {
     });
 
     assertQualityDoesNotIncreaseAbove50({ name });
-  });
-
-  describe('Conjured items', () => {
-    it('reduces in Quality by 2 each day', () => {});
+    assertQualityChangesTwiceAsFastWhenConjured({ name });
   });
 
   // Shared assertions
   function assertQualityDoesNotIncreaseAbove50({ name }) {
-    describe('when quality is at 50', () => {
+    describe('when Quality is at 50', () => {
       beforeEach(() => {
         gildedRose = createShop({ name, quality: 50 });
       });
@@ -152,6 +153,32 @@ describe('Gilded Rose', () => {
       it('does not increase quality above 50', () => {
         gildedRose.updateQuality();
         expect(item().quality).toEqual(50);
+      });
+    });
+  }
+
+  function assertQualityChangesTwiceAsFastWhenConjured({
+    name = 'Item',
+    sellIn = 10,
+    quality = 10,
+  }) {
+    describe('when Conjured', () => {
+      beforeEach(() => {
+        gildedRose = new Shop([
+          new Item(name, sellIn, quality),
+          new Item(`Conjured ${name}`, sellIn, quality),
+        ]);
+      });
+
+      function conjuredItem() {
+        return gildedRose.items[1];
+      }
+
+      it('changes Quality twice as fast', () => {
+        gildedRose.updateQuality();
+        const regularDifference = quality - item().quality;
+        const conjuredDifference = quality - conjuredItem().quality;
+        expect(conjuredDifference).toEqual(2 * regularDifference);
       });
     });
   }

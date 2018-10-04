@@ -20,6 +20,7 @@ class ItemProcessor {
     let qualityChange = this.getQualityChangeRate();
 
     if (this.isPastSellInDate()) { qualityChange *=2; }
+    if (this.isConjuredItem()) { qualityChange *=2; }
 
     const quality = this.item.quality + qualityChange;
     this.item.quality = MathUtils.clamp(
@@ -39,6 +40,10 @@ class ItemProcessor {
 
   isPastSellInDate() {
     return this.item.sellIn <= 0;
+  }
+
+  isConjuredItem() {
+    return this.item.name.includes('Conjured');
   }
 }
 
