@@ -52,6 +52,7 @@ describe('Gilded Rose', () => {
     });
   });
 
+  assertQualityDoesNotIncreaseAbove50({ name });
   assertQualityChangesTwiceAsFastWhenConjured({ name });
 
   describe('Aged Brie', () => {
